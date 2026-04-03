@@ -1,0 +1,12 @@
+{
+  "$schema": "https://aka.ms/codetour-schema",
+  "title": "2. Intro to ArchivesSnake",
+  "steps": [
+    {
+      "file": "README.md",
+      "description": "Welcome back!  This is the next item on today's agenda.  Now that we've set our credentials in a manner and location that ArchivesSnake can use them, how do we actually use ArchivesSnake?\n\nLet's run through some of the examples in the ArchivesSnake [README](https://github.com/archivesspace-labs/archivessnake?tab=readme-ov-file#functionality) in an integrated terminal in our codespace.\n\nPress the following:\n\nWindows / Linux: Press Ctrl + Shift + P.\nmacOS: Press Cmd + Shift + P.\n\nBegin to type \"REPL\" and the option \"Python: Start Native Python REPL\" should appear.  Hit enter.",
+      "line": 9
+    }
+  ],
+  "ref": "main"
+}
