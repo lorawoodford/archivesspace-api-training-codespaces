@@ -6,6 +6,11 @@
       "file": "README.md",
       "description": "Welcome back!  This is the next item on today's agenda.  Now that we've set our credentials in a manner and location that ArchivesSnake can use them, how do we actually use ArchivesSnake?\n\nLet's run through some of the examples in the ArchivesSnake [README](https://github.com/archivesspace-labs/archivessnake?tab=readme-ov-file#functionality) in an integrated terminal in our codespace.\n\nPress the following:\n\nWindows / Linux: Press Ctrl + Shift + P.\nmacOS: Press Cmd + Shift + P.\n\nBegin to type \"REPL\" and the option \"Python: Start Native Python REPL\" should appear.  Hit enter.",
       "line": 9
+    },
+    {
+      "file": "asnake_exercises.md",
+      "description": "Now we're going to walk through a number of exercises that are outlined in this file.  Please make use of the hand raise feature and/or come off mute as you encounter difficulties.",
+      "line": 1
     }
   ],
   "ref": "main"
