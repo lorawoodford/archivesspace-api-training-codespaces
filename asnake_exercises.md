@@ -8,7 +8,9 @@ Return a list of repositories with the low-level API
 from asnake.client import ASnakeClient
 
 client = ASnakeClient()
-client.get('repositories').json()
+repos = client.get('repositories').json()
+
+print(repos)
 ```
 
 We can even pretty print it
@@ -16,11 +18,10 @@ We can even pretty print it
 ```
 from pprint import pprint
 
-repos = client.get('repositories').json()
 pprint(repos)
 ```
 
-Or maybe we want to through all our repositories by page and print their names
+Or maybe we want to iterate through all of our repositories by page and print the repo names
 
 ```
 for repo in client.get_paged('repositories'):
@@ -30,14 +31,14 @@ for repo in client.get_paged('repositories'):
 ## Working with the abstraction layer
 If all we're wanting to do is this kind of read-only exploration, ArchivesSnake also has an abstraction layer. It can save us a little bit of typing!
 
-Let's print all our existing repositories again
+Let's print all our existing repository names again
 
 ```
 from asnake.aspace import ASpace
 
 aspace = ASpace()
 for repo in aspace.repositories:
-    print(repo)
+    print(repo.name)
 ```
 
 This abstraction gets handy as we dig deeper and deeper into records
@@ -73,15 +74,15 @@ for repo in aspace.repositories:
 ```
 
 ## Beyond read-only actions
-Finally, though all this read-only exploration has been useful in familiarizing us with the ASnake client, it also allows us to do more than just search and return read only responses from the API.  We can also create and modify records with ASnake!  
+Finally, though all this read-only exploration has been useful in familiarizing us with the ASnake client, ASnake also allows us to do more than just search and return read only responses from the API.  We can also create and modify records with ASnake!  
 
 Remember, during each of these interactions, we're authenticated in and passing along valid session credentials to the API.  ASnake hides away a bit of this drudgery, but each request is making use (where relevant) of the credentials we supplied in `.archivessnake.yml`.  Whatever permissions the user identified in `.archivessnake.yml` has, also extend to our interactions with the ArchivesSpace API via ASnake. In other words, everything we learned while using the Bruno GUI still applies here!
 
 Let's use the ASnake client to create a some new repositories.  This way, each one of you will have your own repository to play in as we move forward with the training.
 
-If you remember from Bruno, when we were updating a resource record, we issued a GET to that resource, copied the response body, pasted that body into the payload of our POST request, made our edits in the JSON, and sent it away.  We're going to do basically the same here.
+If you remember from Bruno, when we were updating a resource record, we issued a GET to that resource, copied the response body, pasted that body into the payload of our POST request, made our edits in the JSON, and sent it away.  We're going to do essentially the same steps here.
 
-First, let's get the json representation of an existing repository. This way, we have a handy JSON template of what a valid repo looks like in ASpace.
+First, let's get a JSON representation of an existing repository. This way, we'll have a handy JSON template of what a valid repo looks like in ASpace.
 
 Back in the Python REPL:
 
@@ -89,7 +90,11 @@ Back in the Python REPL:
 print(aspace.repositories(2).json())
 ```
 
-While we could always copy/paste this into a file (we've got a blank `repository.json` file in this repository already waiting for this purpose!), we can also just ask Python to do that for us. Let's redirect the output of this command to that empty, waiting file (opened in 'write' mode).
+While we could always copy/paste this into a file (we've got a blank `repository.json` file in this workspace already waiting for this data!), we can also just ask Python to do that for us. Let's redirect the output of this command to that empty, waiting file (opened in 'write' mode).
+
+Just to prove we're being honest here, go ahead and open [repository.json](repository.json).  It's empty, right?
+
+Now in the REPL:
 
 ```
 with open('repository.json', 'w') as f:
@@ -104,16 +109,21 @@ When creating a new repository record, we don't need nearly any of this data, bu
 - name
 - publish
 
-Overwrite the values of those remaining 3 keys, making them whatever unique values you want to use for your new, personal repository in our test environment.  Save your changes.
+If there are any errors in your JSON, our built-in linters will underline the issues with a red squiggle.  The file name will also turn red.  Hover over these underlines and you should get a tip about what is off about your JSON.  Speak up if you hit any road blocks!
+
+Overwrite the values of those remaining 3 keys - repo_code, name, and publish.  Make them whatever unique values you want to use for your new, personal repository in our test environment.  Save your changes.
 
 Back in the Python REPL, let's make our first POST via ASnake.
 
 ```
 import json
 
+from asnake.client import ASnakeClient
+
 with open('repository.json', 'r') as f:
     payload = json.load(f)
 
+client = ASnakeClient()
 response = client.post('/repositories', json=payload)
 
 print(response.status_code)
