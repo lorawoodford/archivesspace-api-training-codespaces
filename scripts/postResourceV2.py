@@ -10,16 +10,18 @@ from datetime import datetime
 def parseArguments():
     parser = argparse.ArgumentParser()
     
-    parser.add_argument("-rId", "--repo-id", help="repo id for new locations", type=int)
+    parser.add_argument("-rId", "--repo-id", help="repo id for new resource", type=int)
+    parser.add_argument("-reT", "--resource-title", help="title of new resource", type=ascii)
+    parser.add_argument("-reId", "--resource-id", help="id0 of new resource", type=ascii)
     parser.add_argument("-dR", "--dry-run", help="dry run?", action='store_true')
     parser.add_argument("--version", action="version", version='%(prog)s - Version 1.0')
 
     return parser.parse_args()
 
-def build_resource():
+def build_resource(resource_title, resource_id):
     my_resource = {}
-    my_resource['title'] = ""
-    my_resource['id_0'] = ""
+    my_resource['title'] = resource_title.strip('"\'')
+    my_resource['id_0'] = resource_id.strip('"\'')
 
     my_resource['level'] = "collection"
     my_resource['finding_aid_language'] = "eng"
@@ -53,7 +55,7 @@ def build_resource():
     
     return my_resource
 
-def main(repo_id, dry_run=False):
+def main(repo_id, resource_title, resource_id, dry_run=False):
     try:
         aspace_client = ASnakeClient()
         aspace_client.authorize()
@@ -62,14 +64,14 @@ def main(repo_id, dry_run=False):
         raise ASnakeAuthError
 
     if not dry_run:
-        response = aspace_client.post(f'/repositories/{repo_id}/resources', json=build_resource())
+        response = aspace_client.post(f'/repositories/{repo_id}/resources', json=build_resource(resource_title, resource_id))
 
         print("Status Code:", response.status_code)
         print("Response Body:", response.text)
         logger.info(f"Status Code: {response.status_code}")
         logger.info(f"Response Body: {json.loads(response.text)}")
     else:
-        draft_resource = build_resource()
+        draft_resource = build_resource(resource_title, resource_id)
         print("The following resource would be created:", draft_resource)
         logger.info(f"The following resource would be created: {draft_resource}")
 
@@ -86,4 +88,4 @@ if __name__ == '__main__':
         logger.info(str(arg) + ": " + str(args.__dict__[arg]))
 
     # Run function
-    main(repo_id=args.repo_id, dry_run=args.dry_run)
+    main(repo_id=args.repo_id, resource_title=args.resource_title, resource_id=args.resource_id, dry_run=args.dry_run)

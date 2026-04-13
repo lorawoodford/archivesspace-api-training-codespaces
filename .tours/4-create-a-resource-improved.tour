@@ -1,0 +1,21 @@
+{
+  "$schema": "https://aka.ms/codetour-schema",
+  "title": "4. Create a Resource Improved",
+  "steps": [
+    {
+      "file": "scripts/postResourceV2.py",
+      "description": "Here is our new and improved Python script for creating a resource.\n\nPerhaps the biggest improvement here is that we no longer need to worry about hard-coding any data directly into this script.  When we run this script via the command line, we can now add a number of arguments to it that will be used to create our new resource record.  We'll demo that a bit later, but that abstraction means we can now use this same script over and over and over to iteratively create data without ever having to update the underlying script.\n\nWe've also reorganized things and broken out specific bits of functionality into various discrete functions.",
+      "line": 1
+    },
+    {
+      "file": "scripts/postResourceV2.py",
+      "description": "For example, everything in this `build_resource` function does just that - it builds out the JSON object that creates our new resource record.  It's still long - over 35 lines! - but it is easier to glance over it and/or collapse it when we're debugging/editing this script.",
+      "line": 21
+    },
+    {
+      "file": "scripts/postResourceV2.py",
+      "description": "Finally, via Python's `argparse` module, we've added the ability to \"dry run\" our changes without actually creating a new resource record.  That could be handy!\n\nWhen you've reached this point, react with the ✅ (green check mark) in Zoom and select \"Finish Tour.\"",
+      "line": 16
+    }
+  ]
+}
