@@ -1,0 +1,37 @@
+{
+  "$schema": "https://aka.ms/codetour-schema",
+  "title": "3. Create a Resource Script",
+  "steps": [
+    {
+      "file": "scripts/postResource.py",
+      "description": "Here's our first Python script of the day!  You can see some familiar syntax and module names from our ASnake experimentation.  We're going to continue to use ASnake in these simple starter scripts.\n\nThis is a very basic (first draft or v. 1) of a script. It's not particularly production-ready at this stage, so unfortunately we've got to hardcode some data in.  Let's do that now.",
+      "line": 1
+    },
+    {
+      "file": "scripts/postResource.py",
+      "description": "Here we're identifying the repo we want to create our new resource in.  Remember your personal repo id from last week?  If not, log in to the [Staff UI](https://api.lyrtech.org/staff) to refresh your member.  Once you've done that, insert just the ID number into the quotes above (e.g. `my_repo = \"2\"`).",
+      "line": 17
+    },
+    {
+      "file": "scripts/postResource.py",
+      "description": "Enter a title for your new resource inside the double quotes (e.g. `\"My new resource record\"`).",
+      "line": 20
+    },
+    {
+      "file": "scripts/postResource.py",
+      "description": "Finally, enter a unique id for your resource (e.g. `\"EAD.123\"`).\n\nWhen you've reached this point, react with the ✅ (green check mark) in Zoom and select \"Finish Tour.\"",
+      "line": 21,
+      "selection": {
+        "start": {
+          "line": 1,
+          "character": 46
+        },
+        "end": {
+          "line": 1,
+          "character": 65
+        }
+      }
+    }
+  ],
+  "ref": "main"
+}

@@ -76,42 +76,53 @@ for repo in aspace.repositories:
 ## Beyond read-only actions
 Finally, though all this read-only exploration has been useful in familiarizing us with the ASnake client, ASnake also allows us to do more than just search and return read only responses from the API.  We can also create and modify records with ASnake!  
 
-Remember, during each of these interactions, we're authenticated in and passing along valid session credentials to the API.  ASnake hides away a bit of this drudgery, but each request is making use (where relevant) of the credentials we supplied in `.archivessnake.yml`.  Whatever permissions the user identified in `.archivessnake.yml` has, also extend to our interactions with the ArchivesSpace API via ASnake. In other words, everything we learned while using the Bruno GUI still applies here!
+Remember, during each of these interactions, we're authenticated in and passing along valid session credentials to the API.  ASnake hides away a bit of this drudgery, but each request is making use (where relevant) of the credentials we supplied in `.archivessnake.yml`.  Whatever permissions the user identified in `.archivessnake.yml` has, they extend to our interactions with the ArchivesSpace API via ASnake. In other words, everything we learned while using the Bruno GUI still applies here!
 
-Let's use the ASnake client to create a some new repositories.  This way, each one of you will have your own repository to play in as we move forward with the training.
+Let's use the ASnake client to create a new record.  We'll start with a pretty simple one - container profiles.
 
-If you remember from Bruno, when we were updating a resource record, we issued a GET to that resource, copied the response body, pasted that body into the payload of our POST request, made our edits in the JSON, and sent it away.  We're going to do essentially the same steps here.
+If you remember from Bruno, when we were updating a resource record, we did the following:
 
-First, let's get a JSON representation of an existing repository. This way, we'll have a handy JSON template of what a valid repo looks like in ASpace.
+1. we issued a GET to that resource
+2. copied the response body and pasted it into a text editor
+3. made edits in the JSON
+4. pasted that JSON into the payload of our POST request
+5. sent it off.  
+
+We're going to do essentially the same steps here.  Get data out -> modify the data -> put the data back in.
+
+First, let's get a JSON representation of an existing container profile. This way, we'll have a handy JSON template of what a valid record looks like in ASpace.
 
 Back in the Python REPL:
 
 ```
-print(aspace.repositories(2).json())
+print(aspace.container_profiles(1).json())
 ```
 
-While we could always copy/paste this into a file (we've got a blank `repository.json` file in this workspace already waiting for this data!), we can also just ask Python to do that for us. Let's redirect the output of this command to that empty, waiting file (opened in 'write' mode).
+While we could always copy/paste this into a file (we've got a blank `container_profile.json` file in this workspace already waiting for this data!), we can also just ask Python to do that for us. Let's redirect the output of this command to that empty, waiting file (opened in 'write' mode).
 
-Just to prove we're being honest here, go ahead and open [repository.json](repository.json).  It's empty, right?
+Just to prove we're being honest here, go ahead and open [container_profile.json](container_profile.json).  It's empty, right?
 
 Now in the REPL:
 
 ```
-with open('repository.json', 'w') as f:
-    print(aspace.repositories(2), file=f)
+with open('container_profile.json', 'w') as f:
+    print(aspace.container_profiles(1), file=f)
 ```
 
-Open `repository.json` and take a look!  
+Open `container_profile.json` and take a look!  
 
-When creating a new repository record, we don't need nearly any of this data, but it is helpful for us to have a starting place to work from so that we make sure we get the syntax and key/value pairs correct.  Go ahead and delete everything in the `repository.json` file, except for:
+When creating a new container profile record, we really only need to ensure we're adding required fields to our new record.  Our current `container_profile.json` file includes a lot more data than we really need.  But it *does* demonstrate the proper syntax and key/value pairs for this record type, so using it as a template is quite helpful.  Go ahead and delete everything in the `container_profile.json` file, except for the following required fields (which can be confirmed in the Staff UI if you like):
 
-- repo_code
-- name
-- publish
+- `name`
+- `dimension_units`
+- `extent_dimension`
+- `depth`
+- `height`
+- `width`
 
 If there are any errors in your JSON, our built-in linters will underline the issues with a red squiggle.  The file name will also turn red.  Hover over these underlines and you should get a tip about what is off about your JSON.  Speak up if you hit any road blocks!
 
-Overwrite the values of those remaining 3 keys - repo_code, name, and publish.  Make them whatever unique values you want to use for your new, personal repository in our test environment.  Save your changes.
+Overwrite the values of 4 keys - `name`, `depth`, `height`, and `width`.  `name` can be whatever unique string you want to make it, but `depth`, `height`, and `width` will accept decimal values only. (`dimension_units` and `extent_dimension` *could* be altered here, but if you look at the Staff UI you'll see they are pulled from controlled value lists.  We'll leave these be to keep things simple this go around.)  Save your changes to `container_profile.json`.
 
 Back in the Python REPL, let's make our first POST via ASnake.
 
@@ -120,17 +131,17 @@ import json
 
 from asnake.client import ASnakeClient
 
-with open('repository.json', 'r') as f:
+with open('container_profile.json', 'r') as f:
     payload = json.load(f)
 
 client = ASnakeClient()
-response = client.post('/repositories', json=payload)
+response = client.post('/container_profiles', json=payload)
 
 print(response.status_code)
 print(response.json())
 ```
 
 ## In Conclusion
-As you can see, there is a lot of power here to do some pretty impressive things.  But, already, the commands we are typing into this Python REPL are getting more and more verbose and tedious to draft.  We've even moved to having intermediary files like our `repository.json` file in the mix.  At a certain point, your work will progress beyond the power of a CLI tool and you may wish to investigate using standalone scripts to work with the API. This will be our next section.
+As you can see, there is a lot of power here to do some pretty impressive things.  But, already, the commands we are typing into this Python REPL are getting more and more verbose and tedious to draft.  We've even moved to having intermediary files like our `container_profile.json` file in the mix.  At a certain point, your work will progress beyond the power of a CLI tool and you may wish to investigate using standalone scripts to work with the API. This will be our next section.
 
 You can close the Python REPL by clicking the "X" at the top of your REPL split screen.

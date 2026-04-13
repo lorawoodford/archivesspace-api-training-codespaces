@@ -10,7 +10,6 @@ logging.setup_logging(filename=f"./logs/my_log_{timestamp}.log", level="DEBUG")
 try:
     aspace_client = ASnakeClient()
     aspace_client.authorize()
-    # print(aspace_client.get('repositories').json())
 except ASnakeAuthError as e:
     print('Failed to authorize ASnake client', e)
     raise ASnakeAuthError
