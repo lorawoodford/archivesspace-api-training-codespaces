@@ -4,7 +4,7 @@
   "steps": [
     {
       "file": "scripts/update_fileuris.py",
-      "description": "Here is the script we will use to complete this task.  It is similar in many ways to our last one, and includes both `argparse` and various `asnake` modules.\n\nWe can check out the available arguments for this script by typing:\n\n`python scripts/update_fileuris.py -h`\n\ninto your terminal now.\n\nRemember, if you need to bring back your terminal, you should press:\n\nMac: Command + ` (backtick)\nWindows: Ctrl + ` (backtick)\n",
+      "description": "Here is the script we will use to complete this task.  It is similar in many ways to our last one, and includes both `argparse` and various `asnake` modules.\n\nWe can check out the available arguments for this script.  Type the following into your terminal now:\n\n`python scripts/update_fileuris.py -h`\n\nRemember, if you need to bring back your terminal, you should press:\n\nMac: Command + ` (backtick)\nWindows: Ctrl + ` (backtick)\n",
       "line": 1
     },
     {
@@ -39,7 +39,7 @@
     },
     {
       "file": "scripts/update_fileuris.py",
-      "description": "Here's that function.  It pings the new URL we have provided via the [Python requests module](https://www.w3schools.com/PYTHON/module_requests.asp) (this is the same underlying module baked in to ArchivesSnake!) and only proceeds if the URL returns a 200/OK status.  If not it prints an error to both our terminal and log file and moves on to the next object/row in our CSV.",
+      "description": "Here's that function.  It pings the new URL we have provided via the [Python requests module](https://www.w3schools.com/PYTHON/module_requests.asp) (this is the same underlying module baked in to ArchivesSnake!) and only proceeds if the URL returns a 200/OK status.  If not it prints an error to both our terminal and log file and moves on to the next object/row in our CSV.  It is likely safe to assume we don't want our file_uri to be updated in ArchivesSpace if the url we provide isn't valid.",
       "line": 39
     },
     {

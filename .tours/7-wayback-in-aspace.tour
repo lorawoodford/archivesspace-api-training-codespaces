@@ -14,7 +14,12 @@
     },
     {
       "file": "scripts/aspace_wayback.py",
-      "description": "Here's the first part of that logic.  First, we search ArchivesSpace via ASnake looking for any archival objects that have an extent type of 'web archives'.  I suspect we don't have any of those in our test data, so let's go make one now.  \n\n1. Open any resource in your repository\n2. Select \"Add Child\" to add an archival object\n3. Enter any placeholder title (we'll be updating this later so don't stress of what you name it)\n4. Select any value from the \"Level of Description\" dropdown\n5. Add an Extent subrecord\n6. Enter any numerical value in Number\n7. Select \"web archives\" from the Type dropdown\n8. Save",
+      "description": "Once again, if we:\n\n`python scripts/aspace_wayback.py -h`\n\nWe'll see the only real argument we need to pass here is our personal repository id.\n\nThe rest of the logic is baked in as part of the script.",
+      "line": 12
+    },
+    {
+      "file": "scripts/aspace_wayback.py",
+      "description": "Here's the first part of that logic.  First, the script searches ArchivesSpace via ASnake looking for any archival objects that have an extent type of 'web archives'.  I suspect we don't have any of those in our test data, so let's go make one now.  \n\n1. Open any resource in your repository\n2. Select \"Add Child\" to add an archival object\n3. Enter any placeholder title (hint: we'll be updating this later so don't stress what you name it)\n4. Select any value from the \"Level of Description\" dropdown\n5. Add an Extent subrecord\n6. Enter any numerical value in Number\n7. Select \"web archives\" from the Type dropdown\n8. Save",
       "line": 21
     },
     {
@@ -24,17 +29,12 @@
     },
     {
       "file": "scripts/aspace_wayback.py",
-      "description": "Once again, if we:\n\n`python scripts/aspace_wayback.py -h`\n\nWe'll see the only real argument we need to pass here is our personal repository id.\n\nThe rest of the logic is baked in as part of the script.",
-      "line": 12
-    },
-    {
-      "file": "scripts/aspace_wayback.py",
-      "description": "Here's that logic.  It looks like the script is searching the wayback API based on the archival object's `title` value.  Furthermore, on the next line, we see that it will pull back the *newest* instance of that archived webpage from the wayback API if any result is returned.  Good to know!\n\n1. Return to the archival object you just created.\n2. Update the title to be the full url of any webpage you think is likely to be in the wayback machine (selecting your organization or institutional homepage might be a good choice!)\n3. (Optional) Create additional AOs that represent additional archived web pages.  Just make sure that:\n    a. You include a 'web archives' extent type\n    b. The title is a valid web url\n4. Save",
+      "description": "Here's that logic.  It looks like the script is searching the wayback API based on the archival object's `title` value.  Furthermore, on the next line, we see that it will pull back the *newest* instance of that archived webpage from the wayback API if any result is returned.  Good to know!\n\n1. Return to the archival object you just created.\n2. Update the title to be the full url of any webpage you think is likely to be in the wayback machine (selecting your organization or institution's homepage might be a good choice!)\n3. (Optional) Create additional AOs that represent additional archived web pages.  Just make sure that:\n    * You include a 'web archives' extent type\n    * The title is a valid web url\n4. Save",
       "line": 30
     },
     {
       "file": "scripts/aspace_wayback.py",
-      "description": "Now we've ensured that our repository has the data it needs to reach further into the meat of this script, including the ultimate goal of creating and linking a digital object for an archived web page to an existing archival object where we've hung metadata about that archived web page.  The `build_do` model is where we build out that new digital object.  Assuming an archived web page for our archival object is found via the wayback API it copies select data from wayback into our digital object, including:",
+      "description": "Now we've ensured that our repository has the data it needs to reach further into the meat of this script.  With this data in place, we can ensure that the script will:\n1. Creating a new digital object out of some data pulled from the wayback API\n2. Link that new digital object (that represents an archived wayback web page) to an existing ArchivesSpace archival object where we've supplied basic metadata about that archived web page.\n\nThe `build_do` model is where we build out that new digital object.  Assuming an archived web page for our archival object is found via the wayback API it copies select data from wayback into our digital object, including:",
       "line": 41
     },
     {
@@ -59,12 +59,12 @@
     },
     {
       "file": "scripts/aspace_wayback.py",
-      "description": "And, finally, we're pulling in the checksum hash from wayback into our ArchivesSpace file version as well.\n\nThere is opinion and preference baked into all of these choices here, and they should be though about carefully before moving forward.  But, this is a good example of how you can essentially crosswalk one existing data set - in our case the wayback response - to an ArchivesSpace record.",
+      "description": "And, finally, we're pulling in the checksum hash from wayback into our ArchivesSpace file version as well.\n\nThere are opinions and preferences baked into all of these choices, and they should be thought about carefully before moving forward.  But, this is a good example of how you can essentially crosswalk one existing data set - in our case the wayback response - to an ArchivesSpace record.",
       "line": 57
     },
     {
       "file": "scripts/aspace_wayback.py",
-      "description": "Finally, this function creates the digital object record and, once created successfully, links it to our intial archival object via a digital object instance.  Much of what is in that linking part of the script is a direct mirror of what we saw in our `link_ao_do.py` from last exercise.\n\nAs always, if we added a `--dry-run` argument no actual updates will be made.  And, all logging will be output both to our terminal and a logfile in the `logs/` directory.",
+      "description": "Finally, this function creates the digital object record and, once created successfully, links it to our intial archival object via a digital object instance.  Much of what is in that linking part of the script is a direct mirror of what we saw in our `link_ao_do.py` from last exercise.\n\nAs always, if we add a `--dry-run` argument no actual updates will be made.  Similarly, keeping with prior conventions, all logging will be output both to our terminal and a logfile in the `logs/` directory.",
       "line": 61
     },
     {
