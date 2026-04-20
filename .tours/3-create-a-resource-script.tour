@@ -9,7 +9,7 @@
     },
     {
       "file": "scripts/postResource.py",
-      "description": "Here we're identifying the repo we want to create our new resource in.  Remember your personal repo id from last week?  If not, log in to the [Staff UI](https://api.lyrtech.org/staff) to refresh your member.  Once you've done that, insert just the ID number into the quotes above (e.g. `my_repo = \"2\"`).",
+      "description": "Here we're identifying the repo we want to create our new resource in.  Remember your personal repo id from last week?  If not, log in to the [Staff UI](https://api.lyrtech.org/staff) to refresh your memory.  Once you've done that, insert just the ID number into the quotes above (e.g. `my_repo = \"2\"`).",
       "line": 17
     },
     {
@@ -19,7 +19,7 @@
     },
     {
       "file": "scripts/postResource.py",
-      "description": "Finally, enter a unique id for your resource (e.g. `\"EAD.123\"`).\n\nWhen you've reached this point, react with the ✅ (green check mark) in Zoom and select \"Finish Tour.\"",
+      "description": "Finally, enter a unique id for your resource (e.g. `\"EAD.123\"`) and save this file.\n\nWhen you've reached this point, react with the ✅ (green check mark) in Zoom and select \"Finish Tour.\"",
       "line": 21,
       "selection": {
         "start": {

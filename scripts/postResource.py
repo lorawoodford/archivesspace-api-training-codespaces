@@ -5,7 +5,7 @@ from asnake.client.web_client import ASnakeAuthError
 from datetime import datetime
 
 timestamp = datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
-logging.setup_logging(filename=f"./logs/my_log_{timestamp}.log", level="DEBUG")
+logging.setup_logging(filename=f"./logs/postResource_{timestamp}.log", level="DEBUG")
 
 try:
     aspace_client = ASnakeClient()

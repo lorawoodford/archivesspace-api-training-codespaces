@@ -62,7 +62,7 @@ if __name__ == "__main__":
     global args
     args = parseArguments()
     timestamp = datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
-    logging.setup_logging(filename=f"./logs/my_log_{timestamp}.log", level="DEBUG")
+    logging.setup_logging(filename=f"./logs/link_ao_do_{timestamp}.log", level="DEBUG")
     logger = logging.get_logger('updateAoDoLog')
 
     print(f'Running {sys.argv[0]} script with following arguments: ')

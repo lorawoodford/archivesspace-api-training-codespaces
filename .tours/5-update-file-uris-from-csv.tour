@@ -1,0 +1,72 @@
+{
+  "$schema": "https://aka.ms/codetour-schema",
+  "title": "5. Update File URIs from CSV",
+  "steps": [
+    {
+      "file": "scripts/update_fileuris.py",
+      "description": "Here is the script we will use to complete this task.  It is similar in many ways to our last one, and includes both `argparse` and various `asnake` modules.\n\nWe can check out the available arguments for this script by typing:\n\n`python scripts/update_fileuris.py -h`\n\ninto your terminal now.\n\nRemember, if you need to bring back your terminal, you should press:\n\nMac: Command + ` (backtick)\nWindows: Ctrl + ` (backtick)\n",
+      "line": 1
+    },
+    {
+      "file": "scripts/update_fileuris.py",
+      "description": "We have a new type of argument in this script - a positional argument.  In our case, this positional argument is a required argument that must be the first argument passed to the script and it should provide the file path to the csv we'll be using to update our file uris.  If we attempt to run this script without this positional argument, it will fail.  Try that now in the terminal by typing:\n\n`python scripts/update_fileuris.py`",
+      "line": 15
+    },
+    {
+      "file": "file_uris.csv",
+      "description": "As we've seen, we MUST provide this script with a csv for it to even run.  Here's a template for our csv prepopulated with some data that you will have to change to match your own repo's digital object records.\n\nIn the [ArchivesSpace Staff UI](https://api.lyrtech.org/staff), ensure you are in your personal repository, then Browse > Digital Objects.  Select a couple digital objects to update and insert their record IDs into the first column of this csv.  You can do more than two if you'd like by adding new rows to the csv.\n\nFinally, add the new file uri you'd like to use for these digital objects.  You can insert anything here, however make sure at least one of the URIs provided is a valid, web-accessible location.  You'll see why in a moment.\n\nSave this file.",
+      "line": 1
+    },
+    {
+      "file": "scripts/update_fileuris.py",
+      "description": "When we execute this script, it will read our CSV.",
+      "line": 72
+    },
+    {
+      "file": "scripts/update_fileuris.py",
+      "description": "After checking for some common error conditions - e.g. the csv file doesn't exist or you don't have permission to open it - it will convert the data in the csv into a [Python dictionary](https://www.w3schools.com/python/python_dictionaries.asp).",
+      "line": 22
+    },
+    {
+      "file": "scripts/update_fileuris.py",
+      "description": "It will then iterate through every object in that dictionary (which represents every row in our csv).",
+      "line": 73
+    },
+    {
+      "file": "scripts/update_fileuris.py",
+      "description": "And one of the first things it does while iterating through these objects, is confirm that the `updated_file_uri` we have provided is a valid url with this `check_url` function.",
+      "line": 76
+    },
+    {
+      "file": "scripts/update_fileuris.py",
+      "description": "Here's that function.  It pings the new URL we have provided via the [Python requests module](https://www.w3schools.com/PYTHON/module_requests.asp) (this is the same underlying module baked in to ArchivesSnake!) and only proceeds if the URL returns a 200/OK status.  If not it prints an error to both our terminal and log file and moves on to the next object/row in our CSV.",
+      "line": 39
+    },
+    {
+      "file": "scripts/update_fileuris.py",
+      "description": "Here we begin our usual three step update process:\n\n1. Get data out\n2. Change the data\n3. Put data back in.\n\nOn this line we are using ArchivesSnake to retrieve the full JSON representation of our digital object.  If we encounter an error getting that digital object, we log that to both our terminal and log file and move on to the next object, otherwise we continue to the `build_digital_object` function.",
+      "line": 77
+    },
+    {
+      "file": "scripts/update_fileuris.py",
+      "description": "Here's that function.  It is *very* simple.  All we're doing here is taking the existing digital object JSON and replacing (or adding) our new file uri to the first file version for that digital object.  \n\nThis approach works for our specific use case, but here is where you can begin to see some of the choices we've made in constructing this script that might not make it a great fit for more complex use cases.  What if we wanted to add a new file version, and not replace existing ones?  What if we wanted to only replace or add a file uri if an existing digital object file version matched an unwanted pattern?  What if the file uri we want to replace isn't reliably in the first file version only?  There is nuance here that is definitely missing, so you can see how this function could grow with time and iterative testing.",
+      "line": 51
+    },
+    {
+      "file": "scripts/update_fileuris.py",
+      "description": "Finally, assuming we haven't flagged this run with the `-dR` or `--dry-run` argument, we update our digital object.\n\nIf we *are* just dry running, we only log our anticipated changes to the terminal and our log file and end the run.",
+      "line": 81
+    },
+    {
+      "file": "scripts/update_fileuris.py",
+      "description": "Here is our final function.  Again, this is a rather simple one.  We take our updated json, pass it as a payload to an ArchivesSnake post targeted to our digital object, and print (to both the terminal and our log file) the reponse of that post.\n\nThis is, in fact, such a simple and common function that - if you anticipate doing a lot of this type of work - I might recommend abstracting it out to your own set of helper functions in a separate file that you could call on time and time again in all sorts of scripts.  That's beyond the scope of our training today, but thinking about how to modularize your code into reusable chunks now is a great practice moving forward!",
+      "line": 55
+    },
+    {
+      "file": "scripts/update_fileuris.py",
+      "description": "Let's try actually running this one on your own for the first time!  If you encounter any issues at all, raise your hand, comment, or come off mute to ask for assistance!\n\nFirst, a dry run.  In your terminal (remember, command/control + ` (backtick) to get that back if you need to), type the following (replacing [your repo id] with just the ID of your personal repo):\n\n`python scripts/update_fileuris.py file_uris.csv -rId [your repo id] -dR`\n\nIf the dry run looks successful (remember, you can check the logs in the `logs/` dir if you want to look at the response a little closer), move on to actually performing the update(s):\n\n`python scripts/update_fileuris.py file_uris.csv -rId [your repo id]`\n\nWhen you've reached this point, react with the ✅ (green check mark) in Zoom and select \"Finish Tour.\"",
+      "line": 60
+    }
+  ],
+  "ref": "main"
+}

@@ -9,3 +9,4 @@ Topics covered include:
 - ArchivesSnake in a Python REPL
 - Using ArchivesSnake within a Python script
 - Basic GET, POST, and DELETE requests via Python scripts
+- Data sharing across two application APIs via a Python script

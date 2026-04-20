@@ -94,7 +94,7 @@ if __name__ == "__main__":
     global args
     args = parseArguments()
     timestamp = datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
-    logging.setup_logging(filename=f"./logs/my_log_{timestamp}.log", level="DEBUG")
+    logging.setup_logging(filename=f"./logs/update_fileuris_{timestamp}.log", level="DEBUG")
     logger = logging.get_logger('updateFileuriLog')
 
     print(f'Running {sys.argv[0]} script with following arguments: ')

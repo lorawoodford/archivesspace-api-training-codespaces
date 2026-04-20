@@ -14,8 +14,18 @@
     },
     {
       "file": "scripts/postResourceV2.py",
-      "description": "Finally, via Python's `argparse` module, we've added the ability to \"dry run\" our changes without actually creating a new resource record.  That could be handy!\n\nWhen you've reached this point, react with the ✅ (green check mark) in Zoom and select \"Finish Tour.\"",
+      "description": "In addition to breaking out some functions, we're also going to start relying on ArchivesSnake's [logging](https://github.com/archivesspace-labs/ArchivesSnake/blob/master/README.md#logging) functionality.  This line here means that any time we run this script, a new log file named `postResourceV2_timestamp.log` will be added to the `logs/` directory (with 'timestamp' being replaced with the actual timestamp of the log run).\n\nThis means messaging pushed to the terminal during script runs will also be persisted in this separate log file after we close our terminal.  Again, this is great for debugging and maintaining a history of actions taken against our ArchivesSpace data.",
+      "line": 81
+    },
+    {
+      "file": "scripts/postResourceV2.py",
+      "description": "We've also added the ability to \"dry run\" our changes without actually creating a new resource record via Python's `argparse` module.  That could be handy!",
       "line": 16
+    },
+    {
+      "file": "scripts/postResourceV2.py",
+      "description": "Though not specifically listed here (it is default behavior), the addition of `argparse` also means our script will now respond to a `-h` or `--help` argument.  When you're running a script for the first time, that is usually a great place to start.\n\nWhen you've reached this point, react with the ✅ (green check mark) in Zoom and select \"Finish Tour.\"",
+      "line": 11
     }
   ]
 }

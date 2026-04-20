@@ -1,0 +1,37 @@
+{
+  "$schema": "https://aka.ms/codetour-schema",
+  "title": "7. Wayback in ASpace",
+  "steps": [
+    {
+      "file": "scripts/aspace_wayback.py",
+      "description": "This is our final script of the day.  It demonstrates how multiple web APIs can be leveraged to share data across systems.  In addition to our usual suspects here (argparse and ASnake), we've added a Python package called [waybackpy](https://pypi.org/project/waybackpy/) that, per it's documentation, \"interfaces with the Internet Archive's Wayback Machine APIs.\"\n\nWe likely didn't realize it at the time, but unlike most of the packages we've used so far today, this is not a default Python package and we therefore had to do some additional steps to make sure it was available to the development environment we're using today.  We did this by making sure it was...",
+      "line": 1
+    },
+    {
+      "file": "requirements.txt",
+      "description": "... in our `requirements.txt` that was triggered when we built our devcontainer.",
+      "line": 2
+    },
+    {
+      "file": "scripts/aspace_wayback.py",
+      "description": "Here's the first part of that logic.  First, we search ArchivesSpace via ASnake looking for any archival objects that have an extent type of 'web archives'.  I suspect we don't have any of those in our test data, so let's go make one now.  \n\n1. Open any resource in your repository\n2. Select \"Add Child\" to add an archival object\n3. Enter any placeholder title (we'll be updating this later so don't stress of what you name it)\n4. Select any value from the \"Level of Description\" dropdown\n5. Add an Extent subrecord\n6. Enter any numerical value in Number\n7. Select \"web archives\" from the Type dropdown\n8. Save",
+      "line": 21
+    },
+    {
+      "file": "scripts/aspace_wayback.py",
+      "description": "So, now we've got an archival object that will be found when we run this script, but what manages the link between an archival object and a wayback machine archived webpage?",
+      "line": 28
+    },
+    {
+      "file": "scripts/aspace_wayback.py",
+      "description": "Once again, if we:\n\n`python scripts/aspace_wayback.py -h`\n\nWe'll see the only real argument we need to pass here is our personal repository id.\n\nThe rest of the logic is baked in as part of the script.",
+      "line": 12
+    },
+    {
+      "file": "scripts/aspace_wayback.py",
+      "description": "Here's that logic.  It looks like the script is searching the wayback API based on the archival object's `title` value.  Furthermore, on the next line, we see that it will pull back the *newest* instance of that archived webpage from the wayback API if any result is returned.  Good to know!\n\n1. Return to the archival object you just created.\n2. Update the title to be the full url of any webpage you think is likely to be in the wayback machine (selecting your organization or institutional homepage might be a good choice!)\n3. (Optional) Create additional AOs that represent additional archived web pages.  Just make sure that:\n    a. You include a 'web archives' extent type\n    b. The title is a valid web url\n4. Save",
+      "line": 30
+    }
+  ],
+  "ref": "main"
+}

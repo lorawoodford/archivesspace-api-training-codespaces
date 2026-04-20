@@ -78,7 +78,7 @@ def main(repo_id, resource_title, resource_id, dry_run=False):
 if __name__ == '__main__':
     args = parseArguments()
     timestamp = datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
-    logging.setup_logging(filename=f"./logs/my_log_{timestamp}.log", level="DEBUG")
+    logging.setup_logging(filename=f"./logs/postResourceV2_{timestamp}.log", level="DEBUG")
     logger = logging.get_logger('postResourceLog')
 
     print(f'Running {sys.argv[0]} script with following arguments: ')
