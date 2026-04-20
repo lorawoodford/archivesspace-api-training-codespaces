@@ -31,6 +31,46 @@
       "file": "scripts/aspace_wayback.py",
       "description": "Here's that logic.  It looks like the script is searching the wayback API based on the archival object's `title` value.  Furthermore, on the next line, we see that it will pull back the *newest* instance of that archived webpage from the wayback API if any result is returned.  Good to know!\n\n1. Return to the archival object you just created.\n2. Update the title to be the full url of any webpage you think is likely to be in the wayback machine (selecting your organization or institutional homepage might be a good choice!)\n3. (Optional) Create additional AOs that represent additional archived web pages.  Just make sure that:\n    a. You include a 'web archives' extent type\n    b. The title is a valid web url\n4. Save",
       "line": 30
+    },
+    {
+      "file": "scripts/aspace_wayback.py",
+      "description": "Now we've ensured that our repository has the data it needs to reach further into the meat of this script, including the ultimate goal of creating and linking a digital object for an archived web page to an existing archival object where we've hung metadata about that archived web page.  The `build_do` model is where we build out that new digital object.  Assuming an archived web page for our archival object is found via the wayback API it copies select data from wayback into our digital object, including:",
+      "line": 41
+    },
+    {
+      "file": "scripts/aspace_wayback.py",
+      "description": "The `digital_object_id` is the wayback `archive_url`.",
+      "line": 53
+    },
+    {
+      "file": "scripts/aspace_wayback.py",
+      "description": "The digital object title is a concatenation of 'Web crawl of' and the archival object title..",
+      "line": 54
+    },
+    {
+      "file": "scripts/aspace_wayback.py",
+      "description": "We're hardcoding the new DO to be published.",
+      "line": 55
+    },
+    {
+      "file": "scripts/aspace_wayback.py",
+      "description": "We're adding a date expression that represents the wayback timestamp for the crawl.",
+      "line": 56
+    },
+    {
+      "file": "scripts/aspace_wayback.py",
+      "description": "And, finally, we're pulling in the checksum hash from wayback into our ArchivesSpace file version as well.\n\nThere is opinion and preference baked into all of these choices here, and they should be though about carefully before moving forward.  But, this is a good example of how you can essentially crosswalk one existing data set - in our case the wayback response - to an ArchivesSpace record.",
+      "line": 57
+    },
+    {
+      "file": "scripts/aspace_wayback.py",
+      "description": "Finally, this function creates the digital object record and, once created successfully, links it to our intial archival object via a digital object instance.  Much of what is in that linking part of the script is a direct mirror of what we saw in our `link_ao_do.py` from last exercise.\n\nAs always, if we added a `--dry-run` argument no actual updates will be made.  And, all logging will be output both to our terminal and a logfile in the `logs/` directory.",
+      "line": 61
+    },
+    {
+      "file": "scripts/aspace_wayback.py",
+      "description": "Now let's run the script (first in dry run, then for real):\n\n`python scripts/aspace_wayback.py -rId [your repo id] -dR`\n\nAnd, next, for real.  Keep in mind that this script may take longer than we're accustomed to to run since we're hitting another, external API!\n\n`python scripts/aspace_wayback.py -rId [your repo id]`\n\nWhen you've reached this point, react with the ✅ (green check mark) in Zoom and select \"Finish Tour.\"",
+      "line": 81
     }
   ],
   "ref": "main"
